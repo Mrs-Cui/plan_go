@@ -3,12 +3,12 @@ package handler
 
 import (
 	"net/http"
-	svc2 "plan_go/plan_go/microserv/mall/service/user/api/internal/svc"
+	"plan_go/microserv/mall/service/user/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
 
-func RegisterHandlers(server *rest.Server, serverCtx *svc2.ServiceContext) {
+func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{

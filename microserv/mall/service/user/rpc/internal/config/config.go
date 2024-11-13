@@ -15,4 +15,17 @@ type Config struct {
 
 	CacheRedis cache.CacheConf
 	Salt string
+	Auth          bool
+	StrictControl bool
+	Redis         struct {
+		Key  string
+		Host string
+		Type string
+		Pass string
+	}
+	Prometheus struct{
+		Host string
+		Port int64
+		Path string
+	}
 }

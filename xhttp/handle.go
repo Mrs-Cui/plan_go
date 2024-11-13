@@ -1,5 +1,7 @@
 package xhttp
 
+import "context"
+
 func FactoryGetUserInfo() HandleInterface {
 	return &GetUserInfo{}
 }
@@ -9,6 +11,8 @@ type GetUserInfo struct {
 }
 
 func (m *GetUserInfo) Handle() Response {
+	ctx := context.Background()
+	ctx.Err()
 	// todo
 	var resp Response
 

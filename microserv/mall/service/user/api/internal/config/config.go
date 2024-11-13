@@ -14,4 +14,9 @@ type Config struct {
 	}
 
 	UserRpc zrpc.RpcClientConf
+	Prometheus struct{
+		Host string
+		Port int64
+		Path string
+	}
 }

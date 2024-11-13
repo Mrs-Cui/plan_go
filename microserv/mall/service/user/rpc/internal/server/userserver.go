@@ -5,33 +5,33 @@ package server
 
 import (
 	"context"
-	logic2 "plan_go/plan_go/microserv/mall/service/user/rpc/internal/logic"
-	svc2 "plan_go/plan_go/microserv/mall/service/user/rpc/internal/svc"
-	user2 "plan_go/plan_go/microserv/mall/service/user/rpc/user"
+	"plan_go/microserv/mall/service/user/rpc/internal/logic"
+	"plan_go/microserv/mall/service/user/rpc/internal/svc"
+	"plan_go/microserv/mall/service/user/rpc/user"
 )
 
 type UserServer struct {
-	svcCtx *svc2.ServiceContext
-	user2.UnimplementedUserServer
+	svcCtx *svc.ServiceContext
+	user.UnimplementedUserServer
 }
 
-func NewUserServer(svcCtx *svc2.ServiceContext) *UserServer {
+func NewUserServer(svcCtx *svc.ServiceContext) *UserServer {
 	return &UserServer{
 		svcCtx: svcCtx,
 	}
 }
 
-func (s *UserServer) Login(ctx context.Context, in *user2.LoginRequest) (*user2.LoginResponse, error) {
-	l := logic2.NewLoginLogic(ctx, s.svcCtx)
+func (s *UserServer) Login(ctx context.Context, in *user.LoginRequest) (*user.LoginResponse, error) {
+	l := logic.NewLoginLogic(ctx, s.svcCtx)
 	return l.Login(in)
 }
 
-func (s *UserServer) Register(ctx context.Context, in *user2.RegisterRequest) (*user2.RegisterResponse, error) {
-	l := logic2.NewRegisterLogic(ctx, s.svcCtx)
+func (s *UserServer) Register(ctx context.Context, in *user.RegisterRequest) (*user.RegisterResponse, error) {
+	l := logic.NewRegisterLogic(ctx, s.svcCtx)
 	return l.Register(in)
 }
 
-func (s *UserServer) UserInfo(ctx context.Context, in *user2.UserInfoRequest) (*user2.UserInfoResponse, error) {
-	l := logic2.NewUserInfoLogic(ctx, s.svcCtx)
+func (s *UserServer) UserInfo(ctx context.Context, in *user.UserInfoRequest) (*user.UserInfoResponse, error) {
+	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
 	return l.UserInfo(in)
 }

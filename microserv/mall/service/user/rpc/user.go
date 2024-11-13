@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	config2 "plan_go/plan_go/microserv/mall/service/user/rpc/internal/config"
-	server2 "plan_go/plan_go/microserv/mall/service/user/rpc/internal/server"
-	svc2 "plan_go/plan_go/microserv/mall/service/user/rpc/internal/svc"
-	user2 "plan_go/plan_go/microserv/mall/service/user/rpc/user"
+	"plan_go/microserv/mall/service/user/rpc/internal/config"
+	"plan_go/microserv/mall/service/user/rpc/internal/server"
+	"plan_go/microserv/mall/service/user/rpc/internal/svc"
+	"plan_go/microserv/mall/service/user/rpc/user"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -20,13 +20,13 @@ var configFile = flag.String("f", "etc/user.yaml", "the config file")
 func main() {
 	flag.Parse()
 
-	var c config2.Config
+	var c config.Config
 	conf.MustLoad(*configFile, &c)
-	ctx := svc2.NewServiceContext(c)
-	srv := server2.NewUserServer(ctx)
+	ctx := svc.NewServiceContext(c)
+	srv := server.NewUserServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		user2.RegisterUserServer(grpcServer, srv)
+		user.RegisterUserServer(grpcServer, srv)
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

@@ -1,0 +1,19 @@
+package main
+
+import (
+	"context"
+)
+
+func Plan(ctx context.Context) {
+	
+	select {
+	case <- ctx.Done():
+
+	default:
+
+	}
+}
+
+func main() {
+	ctx := context.Background()
+}

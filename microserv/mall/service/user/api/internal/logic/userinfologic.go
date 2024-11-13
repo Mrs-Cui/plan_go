@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 	"encoding/json"
-	svc2 "plan_go/plan_go/microserv/mall/service/user/api/internal/svc"
-	types2 "plan_go/plan_go/microserv/mall/service/user/api/internal/types"
-	userclient2 "plan_go/plan_go/microserv/mall/service/user/rpc/userclient"
+	"plan_go/microserv/mall/service/user/api/internal/svc"
+	"plan_go/microserv/mall/service/user/api/internal/types"
+	"plan_go/microserv/mall/service/user/rpc/userclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -13,10 +13,10 @@ import (
 type UserInfoLogic struct {
 	logx.Logger
 	ctx    context.Context
-	svcCtx *svc2.ServiceContext
+	svcCtx *svc.ServiceContext
 }
 
-func NewUserInfoLogic(ctx context.Context, svcCtx *svc2.ServiceContext) UserInfoLogic {
+func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) UserInfoLogic {
 	return UserInfoLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
@@ -24,16 +24,16 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc2.ServiceContext) UserInfo
 	}
 }
 
-func (l *UserInfoLogic) UserInfo() (resp *types2.UserInfoResponse, err error) {
+func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResponse, err error) {
 	uid, _ := l.ctx.Value("uid").(json.Number).Int64()
-	res, err := l.svcCtx.UserRpc.UserInfo(l.ctx, &userclient2.UserInfoRequest{
+	res, err := l.svcCtx.UserRpc.UserInfo(l.ctx, &userclient.UserInfoRequest{
 		Id: uid,
 	})
 	if err != nil {
 		return nil, err
 	}
 
-	return &types2.UserInfoResponse{
+	return &types.UserInfoResponse{
 		Id:     res.Id,
 		Name:   res.Name,
 		Gender: res.Gender,

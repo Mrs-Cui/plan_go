@@ -2,20 +2,20 @@ package svc
 
 import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
-	model2 "plan_go/plan_go/microserv/mall/service/user/model"
-	config2 "plan_go/plan_go/microserv/mall/service/user/rpc/internal/config"
+	"plan_go/microserv/mall/service/user/model"
+	"plan_go/microserv/mall/service/user/rpc/internal/config"
 )
 
 type ServiceContext struct {
-	Config config2.Config
+	Config config.Config
 
-	UserModel model2.UserModel
+	UserModel model.UserModel
 }
 
-func NewServiceContext(c config2.Config) *ServiceContext {
+func NewServiceContext(c config.Config) *ServiceContext {
 	conn := sqlx.NewMysql(c.Mysql.DataSource)
 	return &ServiceContext{
 		Config:    c,
-		UserModel: model2.NewUserModel(conn, c.CacheRedis),
+		UserModel: model.NewUserModel(conn, c.CacheRedis),
 	}
 }

@@ -2,22 +2,22 @@ package handler
 
 import (
 	"net/http"
-	logic2 "plan_go/plan_go/microserv/mall/service/user/api/internal/logic"
-	svc2 "plan_go/plan_go/microserv/mall/service/user/api/internal/svc"
-	types2 "plan_go/plan_go/microserv/mall/service/user/api/internal/types"
+	"plan_go/microserv/mall/service/user/api/internal/logic"
+	"plan_go/microserv/mall/service/user/api/internal/svc"
+	"plan_go/microserv/mall/service/user/api/internal/types"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func RegisterHandler(svcCtx *svc2.ServiceContext) http.HandlerFunc {
+func RegisterHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types2.RegisterRequest
+		var req types.RegisterRequest
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := logic2.NewRegisterLogic(r.Context(), svcCtx)
+		l := logic.NewRegisterLogic(r.Context(), svcCtx)
 		resp, err := l.Register(req)
 		if err != nil {
 			httpx.Error(w, err)
