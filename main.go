@@ -23,6 +23,7 @@ import (
 	"unicode"
 	"unsafe"
 
+	"github.com/google/uuid"
 	"github.com/opentracing/opentracing-go"
 	"go.elastic.co/apm"
 	"go.elastic.co/apm/module/apmot"
@@ -472,17 +473,22 @@ func main()  {
 	fmt.Println("JSON: %s", string(data))
 	next := tree.BuildNext("ababcabd")
 	fmt.Println("Next:%v", next)
-	pos := tree.MovePos("abdbcabdtbc")
-	fmt.Println("Post:%v", pos)
-	var tta interface{} = float64(4248680914010842)
-	tta1 := tta.(float64)
+	pattern, err = regexp.Compile("[0-9.]+")
+	if err != nil {
+		return
+	}
+	m := pattern.Find([]byte("-0.013%"))
+	fmt.Println("Match:%s", string(m))
 
-	tta2 := int64(tta1)
-	fmt.Println("TTA1:%v", tta2)
-	fmt.Println("TTa:%v", 0 == 0x0)
-
-	var c2 map[int]int
-	strings.Join()
-	fmt.Printf("C2:%+v\n", c2 == nil)
-
+	// 生成一个新的UUID
+	newUUID := uuid.New()
+ 
+	// 打印生成的UUID
+	fmt.Println("Generated UUID:", newUUID)
+ 
+	// 生成UUID的字符串表示形式
+	uuidString := newUUID.String()
+	fmt.Println("UUID as string:", uuidString)
+	pool := sync.Map{}
+	pool.Put()
 }
